@@ -1,0 +1,45 @@
+server:
+  port: 8091
+
+air:
+  provider: gseAirService
+  url: "http://smart.ktbiz5g.co.kr/gsenergy/api/getData.php"
+  serviceKey: 478a18757446a8e1d3fe7f4cd66f35cb081683a1
+  connectionTimeout: 5000
+  readTimeout: 5000
+
+spring:
+  datasource:
+    atensys:
+      username: atensys
+      password: aten3360
+      driver-class-name: org.mariadb.jdbc.Driver
+      jdbc-url: jdbc:mariadb://localhost:13306/atensys?allowMultiQueries=true&amp;autoReconnect=true
+
+
+
+  session:
+    store-type: jdbc
+    jdbc:
+      initialize-schema: never
+      table-name: SPRING_SESSION
+
+mybatis:
+  mapper-locations: mybatis/mapper/*/*.xml
+
+# refs: https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#features.logging
+logging:
+  level:
+    root: info
+    kr.co.atensys.app.air: info
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} %-5p [%c{3}::%M] %m%n"
+    file: "%d{yyyy-MM-dd HH:mm:ss} %-5p - [%c{3}::%M] %m%n"
+  file:
+    name: app.log
+  logback:
+    rollingpolicy:
+      max-history: 7
+      max-file-size: 10MB
+      file-name-pattern: logs/app.%d{yyyy-MM-dd}.%i.gz
+
